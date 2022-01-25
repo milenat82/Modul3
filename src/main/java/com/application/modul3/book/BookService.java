@@ -15,11 +15,11 @@ public class BookService {
 		return bookRepository.saveAndFlush(book);
 	}
 
-	public List<Book> getAllUsers() {
+	public List<Book> getAllBooks() {
 		return bookRepository.findAll();
 	}
 
-	public Book getUserById(Integer id) {
+	public Book getBookById(Integer id) {
 		Optional<Book> bookOpt = bookRepository.findById(id);
 		if (bookOpt.isPresent()) {
 			return bookOpt.get();
@@ -27,7 +27,7 @@ public class BookService {
 		return null;
 	}
 	
-	public void deleteUserById(Integer id) {
+	public void deleteBookById(Integer id) {
 		bookRepository.deleteById(id);
 	}
 }

@@ -24,17 +24,17 @@ public class BookController {
 	}
 	
 	@GetMapping("/list")
-	public List<Book> getAllUsers() {
-		return bookService.getAllUsers();
+	public List<Book> getAllBooks() {
+		return bookService.getAllBooks();
 	}
 
 	@GetMapping("/{id}")
-	public Book getUserById(@PathVariable Integer id) {
-		return bookService.getUserById(id);
+	public Book getBookById(@PathVariable Integer id) {
+		return bookService.getBookById(id);
 	}
 	
 	@DeleteMapping("/{id}")
 	public void deleteBookById(@PathVariable Integer id) {
-		bookService.deleteUserById(id);
+		bookService.deleteBookById(id);
 	}
 }
