@@ -18,26 +18,25 @@ public class PublisherService {
 	public List<Publisher> getAllPublishers() {
 		return publisherRepository.findAll();
 	}
-	
+
 	public Publisher updatePublisher(Publisher publisher, Integer id) {
-		Publisher publisherUpdate=getPublisherById(id);
+		Publisher publisherUpdate = getPublisherById(id);
 		publisherUpdate.setAddress(publisher.getAddress());
 		publisherUpdate.setName(publisher.getName());
 		publisherRepository.flush();
 		return publisherUpdate;
 	}
-	
-	
+
 	public void detelePublisherById(Integer id) {
 		publisherRepository.deleteById(id);
 	}
-	
+
 	public Publisher getPublisherById(Integer id) {
-		Optional<Publisher>publisherOpt=publisherRepository.findById(id);
-		if(publisherOpt.isPresent()) {
+		Optional<Publisher> publisherOpt = publisherRepository.findById(id);
+		if (publisherOpt.isPresent()) {
 			return publisherOpt.get();
 		}
 		return null;
 	}
-	
+
 }

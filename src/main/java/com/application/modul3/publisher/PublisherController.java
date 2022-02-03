@@ -34,7 +34,7 @@ public class PublisherController {
 	public List<PublisherDTO> getAllPublishers() {
 		return publisherMappper.publisherListToPublisherListDTO(publisherService.getAllPublishers());
 	}
-	
+
 	@PutMapping("/{id}")
 	public Publisher updatePublisher(@RequestBody Publisher publisher, @PathVariable Integer id) {
 		return publisherService.updatePublisher(publisher, id);
@@ -44,6 +44,5 @@ public class PublisherController {
 	public void detelePublisherById(@PathVariable Integer id) {// de ce se pune PATH VARIABLE?
 		publisherService.detelePublisherById(id);
 	}
-	
 
 }

@@ -8,42 +8,42 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="publisher", schema="administration")
+@Table(name = "publisher", schema = "administration")
 public class Publisher {
-	
-@Id
-@Column(name="id")
-@GeneratedValue(strategy=GenerationType.IDENTITY)
-private Integer id;
 
-@Column(name="name")
-private String name;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-@Column(name="address")
-private String address;
+	@Column(name = "name")
+	private String name;
 
-public Integer getId() {
-	return id;
-}
+	@Column(name = "address")
+	private String address;
 
-public void setId(Integer id) {
-	this.id = id;
-}
+	public Integer getId() {
+		return id;
+	}
 
-public String getAddress() {
-	return address;
-}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-public void setAddress(String address) {
-	this.address = address;
-}
+	public String getAddress() {
+		return address;
+	}
 
-public String getName() {
-	return name;
-}
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
-public void setName(String name) {
-	this.name = name;
-}
-	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

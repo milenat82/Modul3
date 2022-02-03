@@ -1,5 +1,4 @@
 package com.application.modul3.exemplary;
-import java.time.LocalDate;
 
 import java.time.LocalDate;
 
@@ -19,7 +18,7 @@ import com.application.modul3.book.Book;
 public class Exemplary {
 
 	@Id
-	@Column(name = "uid")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
