@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.application.modul3.book.Book;
 import com.application.modul3.book.dto.BookDTO;
+import com.application.modul3.book.dto.BookCreateDTO;
 
 @Service
 public class BookMapper {
@@ -38,4 +39,23 @@ public class BookMapper {
 //		}
 //		return bookListDTO;
 	}
+	
+	public BookCreateDTO book2BookCreateDTO(Book book) {
+		BookCreateDTO bookCreateDTO = new BookCreateDTO();
+		bookCreateDTO.setId(book.getId());
+		bookCreateDTO.setTitle(book.getTitleBook());
+		bookCreateDTO.setIsbn(book.getIsbnBook());
+		bookCreateDTO.setYear(book.getYearBook());
+		//bookDTO.setExemplaryListDTO(exemplaryMapper.exemplaryList2ExemplaryListDTO(book.getExemplaryList()));
+		return bookCreateDTO;
+	}
+	
+	public Book bookCreateDTO2Book(BookCreateDTO bookCreateDTO) {
+		Book book = new Book();
+		book.setTitleBook(bookCreateDTO.getTitle());
+		book.setYearBook(bookCreateDTO.getYear());
+		book.setIsbnBook(bookCreateDTO.getIsbn());
+		return book;
+	}
+	
 }

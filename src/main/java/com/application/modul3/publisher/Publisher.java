@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.application.modul3.exemplary.Exemplary;
+
 @Entity
 @Table(name = "publisher", schema = "administration")
 public class Publisher {
@@ -45,5 +47,10 @@ public class Publisher {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	/*
+	 * public void addExemplary(Exemplary exemplary) { this.addExemplary(exemplary);
+	 * }
+	 */
 
 }

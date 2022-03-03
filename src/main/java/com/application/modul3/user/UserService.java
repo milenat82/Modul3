@@ -11,12 +11,12 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	public User createUser(User user) {
 		return userRepository.saveAndFlush(user);
 	}
 
-	public List<User> getAllUsers() {
+	public List<User> getAllUser() {
 		return userRepository.findAll();
 	}
 
@@ -27,8 +27,20 @@ public class UserService {
 		}
 		return null;
 	}
-	
+
 	public void deleteUserById(Integer id) {
 		userRepository.deleteById(id);
+	}
+
+	// tr sa verificam daca user-ul cu id respectiv este in baza noastra de date
+	public User updateUser(User user, Integer id) {
+		User userUpdate = getUserById(id);
+		userUpdate.setFirstName(user.getFirstName());
+		userUpdate.setLastName(user.getLastName());
+		userUpdate.setMail(user.getMail());
+		userUpdate.setAddress(user.getAddress());
+		userRepository.flush();
+		return userUpdate;
+
 	}
 }

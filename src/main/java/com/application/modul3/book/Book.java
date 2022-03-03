@@ -1,6 +1,7 @@
 package com.application.modul3.book;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,11 +10,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+import com.application.modul3.author.Author;
 import com.application.modul3.exemplary.Exemplary;
-
 
 @Entity
 @Table(name = "book", schema = "administration")
@@ -32,9 +35,15 @@ public class Book {
 	@Column(name = "isbn")
 	private String isbn;
 
+	// entitatea parinte
 	@OneToMany(mappedBy = "book", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.REMOVE }, orphanRemoval = true)
+	// @JsonIgnoreProperties("book")
 	private Set<Exemplary> exemplaries;
+
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "author_book", schema = "administration", joinColumns = @JoinColumn(name = "book_id", nullable = false), inverseJoinColumns = @JoinColumn(name = "author_id", nullable = false))
+	private Set<Author> authors = new HashSet<>();
 
 	public Integer getId() {
 		return id;
@@ -56,9 +65,8 @@ public class Book {
 		return yearBook;
 	}
 
-	
-	public void setYearBook(LocalDate yearBook) {
-		this.yearBook = yearBook;
+	public void setYearBook(LocalDate date) {
+		this.yearBook = date;
 	}
 
 	public String getIsbnBook() {
@@ -69,11 +77,13 @@ public class Book {
 		this.isbn = isbn;
 	}
 
+	// add un exemplar de carte
 	public void addExemplary(Exemplary exemplary) {
 		this.exemplaries.add(exemplary);
 		exemplary.setBook(this);
 	}
 
+	// stergerea unui exemplar
 	public void removeExemplary(Exemplary exemplary) {
 		this.exemplaries.remove(exemplary);
 		exemplary.setBook(null);
@@ -87,4 +97,16 @@ public class Book {
 		this.exemplaries = exemplaries;
 	}
 
+	public void addAuthor(Author author) {
+		this.authors.add(author);
+		author.getBooks().add(this);
+	}
+
+	public Set<Author> getAuthors() {
+		return authors;
+	}
+
+	public void setAuthors(Set<Author> authors) {
+		this.authors = authors;
+	}
 }
