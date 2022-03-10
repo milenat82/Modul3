@@ -46,19 +46,16 @@ public class BookService {
 		bookRepository.deleteById(id);
 	}
 
-	// update-DE SCHIMBAT CU DTO
-	public Book updateBook(Book book, Integer id) {
-		Book bookUpdate = getBookById(id);
-		bookUpdate.setTitleBook(book.getTitleBook());
-		bookUpdate.setYearBook(book.getYearBook());
-		bookUpdate.setIsbnBook(book.getIsbnBook());
-		bookRepository.flush();
-		return bookUpdate;
-	}
-
-	// testata doar de Camelia!
-	public List<Book> findByTitle(String title) {
-		return bookRepository.findByTitle(title);
-	}
+	/*
+	 * // update-DE SCHIMBAT CU DTO public Book updateBook(Book book, Integer id) {
+	 * Book bookUpdate = getBookById(id);
+	 * bookUpdate.setTitleBook(book.getTitleBook());
+	 * bookUpdate.setYearBook(book.getYearBook());
+	 * bookUpdate.setIsbnBook(book.getIsbnBook()); bookRepository.flush(); return
+	 * bookUpdate; }
+	 * 
+	 * // testata doar de Camelia! public List<Book> findByTitle(String title) {
+	 * return bookRepository.findByTitle(title); }
+	 */
 
 }
