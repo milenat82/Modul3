@@ -12,13 +12,11 @@ public class BookCreateDTO {
 	private Set<Integer> authorIds;
 	// private List<ExemplaryDTO> exemplaryDTO; -> de facut getter +setter
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	
+	 public Integer getId() { return id; }
+	
+	 public void setId(Integer id) { this.id = id; }
+	
 
 	public String getTitle() {
 		return title;

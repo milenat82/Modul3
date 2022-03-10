@@ -1,6 +1,7 @@
 package com.application.modul3.appointment;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +27,6 @@ public class AppointmentService {
 	private UserRepository userRepository;
 
 	public Set<Appointment> getAllAppointmentsForUser(Integer userId) {
-
 		return appointmentRepository.findByUser(userId);
 	}
 
@@ -36,7 +36,7 @@ public class AppointmentService {
 
 	public void book(Appointment appointment, Integer exemplaryId, Integer userId) {
 		if (appointment.getDateFrom().isAfter(appointment.getDateUntil())) {
-			throw new ValidationException("End date of the appointment is after start date");
+			throw new ValidationException("End date of the appointment must be after start date");
 		}
 		Exemplary exemplary = exemplaryRepository.findById(exemplaryId)
 				.orElseThrow(() -> new ResourceNotFoundException("Exemplary not found"));
@@ -49,8 +49,13 @@ public class AppointmentService {
 
 		exemplary.addAppointment(appointment);
 		user.addAppointment(appointment);
-
 		appointmentRepository.saveAndFlush(appointment);
+	}
+	
+	
+	
+	public List<Exemplary> getExemplariesForPeriod(LocalDate dateFrom, LocalDate dateUntil, Integer bookId) {
+		return exemplaryRepository.getExemplariesForPeriod(dateFrom, dateUntil, bookId);
 	}
 
 }

@@ -31,13 +31,27 @@ public class AppointmentController {
 
 	@GetMapping("/find/{startDate}/{endDate}/{bookId}")
 	public List<ExemplaryDTO> findFreeExemplaries(@PathVariable String startDate, @PathVariable String endDate,
+
 			@PathVariable Integer bookId) {
 		List<Exemplary> freeExemplaries = appointmentService.findFreeExemplaries(LocalDate.parse(startDate),
 				LocalDate.parse(endDate), bookId);
 		return exemplaryMapper.exemplaryList2ExemplaryDTOList(freeExemplaries);
 	}
 
-	@PostMapping("/book/{exemplaryId}/{userId}")///nu trebuie scrisa si perioada?
+	@GetMapping("/list/{userId}")
+	public List<AppointmentDTO> getAppointmentsForUser(@PathVariable Integer userId) {
+		List<Appointment> appointmentDBs = new ArrayList<>(appointmentService.getAllAppointmentsForUser(userId));
+		return appointmentMapper.appointmentDBList2AppointmentList(appointmentDBs);
+	}
+
+	@PostMapping("/find")//////////NOT WORKING
+	public List<ExemplaryDTO> getExemplariesForPeriod(@RequestBody AppointmentInfoDTO appointmentInfoDTO) {
+		List<Exemplary> exemplaries = appointmentService.getExemplariesForPeriod(appointmentInfoDTO.getDateFrom(),
+				appointmentInfoDTO.getDateUntil(), appointmentInfoDTO.getBookId());
+		return exemplaryMapper.exemplaryList2ExemplaryDTOList(exemplaries);
+	}
+
+	@PostMapping("/book/{exemplaryId}/{userId}") /// perioada e scrisa in body
 	public void book(@RequestBody AppointmentCreateDTO appointmentCreateDTO, @PathVariable Integer exemplaryId,
 			@PathVariable Integer userId) {
 		appointmentService.book(appointmentMapper.appointmnetCreateDTO2Appointment(appointmentCreateDTO), exemplaryId,

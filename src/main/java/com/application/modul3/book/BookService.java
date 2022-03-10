@@ -1,8 +1,6 @@
 package com.application.modul3.book;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.application.modul3.author.Author;
 import com.application.modul3.author.AuthorService;
-
+import com.application.modul3.exception.ResourceNotFoundException;
 
 @Service
 public class BookService {
@@ -20,40 +18,35 @@ public class BookService {
 	@Autowired
 	private AuthorService authorService;
 
-	// cream o inregistre si o salvam
+	// cream o carte si o salvam
 	public Book createBook(Book book) {
 		return bookRepository.saveAndFlush(book);
 	}
-	
+
 	public Book createBook(Book book, Set<Integer> authorIds) {
 		Set<Author> authors = authorService.getAuthors(authorIds);
-		for(Author author : authors) {
+		for (Author author : authors) {
 			book.addAuthor(author);
 		}
 		return bookRepository.save(book);
 	}
 
-	// obtinem toate inre din db
+	// obtinem toate cartile din db
 	public List<Book> getAllBooks() {
 		return bookRepository.findAll();
 	}
 
-	// obtinem o inregistare dupa id
+	// obtinem o carte dupa id
 	public Book getBookById(Integer id) {
-		// declaram o carte optionala ca fiind cartea cu id- specificat
-		Optional<Book> bookOpt = bookRepository.findById(id);
-		if (bookOpt.isPresent()) {
-			return bookOpt.get();
-		}
-		return null;
+		return bookRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Book not found"));
 	}
 
-	// stergerea unei carte
+	// stergerea unei carti
 	public void deleteBookById(Integer id) {
 		bookRepository.deleteById(id);
 	}
 
-	// update
+	// update-DE SCHIMBAT CU DTO
 	public Book updateBook(Book book, Integer id) {
 		Book bookUpdate = getBookById(id);
 		bookUpdate.setTitleBook(book.getTitleBook());
@@ -63,13 +56,9 @@ public class BookService {
 		return bookUpdate;
 	}
 
+	// testata doar de Camelia!
 	public List<Book> findByTitle(String title) {
-		List<Book> listBookByTitle = new ArrayList<>();
-				
-		listBookByTitle.addAll(bookRepository.findByTitle(title));
-		
-		return listBookByTitle;
-
+		return bookRepository.findByTitle(title);
 	}
 
 }

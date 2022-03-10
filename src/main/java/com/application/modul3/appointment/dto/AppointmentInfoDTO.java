@@ -1,26 +1,27 @@
 package com.application.modul3.appointment.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class AppointmentInfoDTO {
-	private LocalDateTime dateFrom;
-	private LocalDateTime dateUntil;
+	private LocalDate dateFrom;
+	private LocalDate dateUntil;
 	private Integer userId;
 	private Integer bookId;
 
-	public LocalDateTime getDateFrom() {
+	public LocalDate getDateFrom() {
 		return dateFrom;
 	}
 
-	public void setDateFrom(LocalDateTime dateFrom) {
+	public void setDateFrom(LocalDate dateFrom) {
 		this.dateFrom = dateFrom;
 	}
 
-	public LocalDateTime getDateUntil() {
+	public LocalDate getDateUntil() {
 		return dateUntil;
 	}
 
-	public void setDateUntil(LocalDateTime dateUntil) {
+	public void setDateUntil(LocalDate dateUntil) {
 		this.dateUntil = dateUntil;
 	}
 

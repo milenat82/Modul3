@@ -18,7 +18,7 @@ public class ExemplaryService {
 	@Autowired
 	private PublisherService publisherService;
 	@Autowired
-	private BookService bookService;
+	private BookService bookService;//postasul care nu poate intra in casa mea si sa deschida dulapurile
 
 	public Exemplary createExemplary(Integer bookId, Integer publisherId, Exemplary exemplary) throws Exception {
 		Book book = bookService.getBookById(bookId);

@@ -18,7 +18,7 @@ public class AuthorService {
 	}
 
 	// obtinerea tuturor autorilor
-	public List<Author> getAllAuthors() {
+	public List<Author> getAllAuthor() {
 		return authorRepository.findAll();
 	}
 	
@@ -54,6 +54,7 @@ public class AuthorService {
 	// gasirea unui autor dupa nume
 	public Author getAuthorByName(String name) {
 		return authorRepository.findByNameContaining(name);
+		
 	}
 
 	// gasirea autorilor care nu au decedat

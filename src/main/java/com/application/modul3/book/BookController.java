@@ -53,12 +53,12 @@ public class BookController {
 		bookService.deleteBookById(id);
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/{id}")////ADAUGA CU NULL IN BD
 	public Book updateBook(@RequestBody Book book, @PathVariable Integer id) {
 		return bookService.updateBook(book, id);
 	}
 
-	@GetMapping("/{title}")
+	@GetMapping("/title/{title}")
 	public List<Book> findByTitle(@PathVariable("title") String title) {
 		return bookService.findByTitle(title);
 

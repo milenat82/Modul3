@@ -1,6 +1,5 @@
 package com.application.modul3.book.dto;
 
-
 import java.time.LocalDate;
 
 //DTO - Data Transfer Object -> arata 1:1 ca si campuri cu entitatile pe care le folosim la BD
