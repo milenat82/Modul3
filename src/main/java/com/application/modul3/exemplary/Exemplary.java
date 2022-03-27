@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
 import com.application.modul3.appointment.Appointment;
@@ -41,13 +42,20 @@ public class Exemplary {
 	@JoinColumn(name = "book_id")
 	private Book book;
 
-	@ManyToOne()
+	@ManyToOne()//unidirectional
 	@JoinColumn(name = "publisher_id")
 	private Publisher publisher;
 
 	@OneToMany(mappedBy = "exemplary", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.REMOVE }, orphanRemoval = true)
 	private List<Appointment> appointments = new ArrayList<>();
+	
+	//ca sa putem sterge un exemplar, sau facem in asa fel sa nu avem la Book-exemplary (egaer-eager)
+		@PreRemove
+		public void delete() {
+			this.book.removeExemplary(this);
+		}
+
 
 	public Integer getId() {
 		return id;

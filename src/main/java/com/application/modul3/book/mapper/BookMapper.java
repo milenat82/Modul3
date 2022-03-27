@@ -3,13 +3,14 @@ package com.application.modul3.book.mapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.application.modul3.book.Book;
 import com.application.modul3.book.dto.BookDTO;
 import com.application.modul3.book.dto.BookCreateDTO;
 
-@Service
+@Component
 public class BookMapper {
 	//@Autowired ExemplaryMapper exemplaryMapper;
 	
@@ -42,7 +43,7 @@ public class BookMapper {
 	
 	public BookCreateDTO book2BookCreateDTO(Book book) {
 		BookCreateDTO bookCreateDTO = new BookCreateDTO();
-		bookCreateDTO.setId(book.getId());
+	//	bookCreateDTO.setId(book.getId());
 		bookCreateDTO.setTitle(book.getTitleBook());
 		bookCreateDTO.setIsbn(book.getIsbnBook());
 		bookCreateDTO.setYear(book.getYearBook());

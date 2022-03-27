@@ -36,7 +36,7 @@ public class Book {
 	@Column(name = "isbn")
 	private String isbn;
 
-	// entitatea parinte
+	// entitatea parinte//bidirectional-si cartea stie de exemplar
 	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.REMOVE }, orphanRemoval = true)
 	// @JsonIgnoreProperties("book")
@@ -81,7 +81,7 @@ public class Book {
 	// add un exemplar de carte
 	public void addExemplary(Exemplary exemplary) {
 		this.exemplaries.add(exemplary);
-		exemplary.setBook(this);
+		exemplary.setBook(this);//
 	}
 
 	// stergerea unui exemplar

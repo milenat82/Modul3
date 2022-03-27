@@ -5,7 +5,7 @@ import java.util.Set;
 
 //DTO - Data Transfer Object -> arata 1:1 ca si campuri cu entitatile pe care le folosim la BD
 public class BookCreateDTO {
-	private Integer id;
+//	private Integer id;
 	private String title;
 	private LocalDate year;
 	private String isbn;
@@ -13,10 +13,11 @@ public class BookCreateDTO {
 	// private List<ExemplaryDTO> exemplaryDTO; -> de facut getter +setter
 
 	
-	 public Integer getId() { return id; }
-	
-	 public void setId(Integer id) { this.id = id; }
-	
+	/*
+	 * public Integer getId() { return id; }
+	 * 
+	 * public void setId(Integer id) { this.id = id; }
+	 */
 
 	public String getTitle() {
 		return title;

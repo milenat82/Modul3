@@ -22,7 +22,7 @@ public class ExemplaryService {
 
 	public Exemplary createExemplary(Integer bookId, Integer publisherId, Exemplary exemplary) throws Exception {
 		Book book = bookService.getBookById(bookId);
-		if (book == null) {
+		if (book == null) {//trebuie sa verificam ca avem o carte
 			throw new Exception("Book with id " + bookId + " was not found");
 		}
 		Publisher publisher = publisherService.getPublisherById(publisherId);
@@ -30,7 +30,7 @@ public class ExemplaryService {
 		// one to many + many to one (bidirectional)
 		book.addExemplary(exemplary);
 		// doar many to one
-		exemplary.setPublisher(publisher);
+		exemplary.setPublisher(publisher);//punem Set si nu addPublisher pt ca e unidirectional
 
 		return exemplaryRepository.saveAndFlush(exemplary);
 	}

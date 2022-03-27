@@ -1,37 +1,46 @@
 package com.application.modul3.car;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.application.modul3.car.dto.CarCreateDto;
-import com.application.modul3.car.dto.CarDto;
+import com.application.modul3.car.dto.CarCreateDTO;
+import com.application.modul3.car.dto.CarDTO;
 import com.application.modul3.car.mapper.CarMapper;
 
+@RestController
+@RequestMapping("/cars")
 public class CarController {
 	@Autowired
-	CarService carService;
+	private CarService carService;
 	@Autowired
-	CarMapper carMapper;
-
-	// cars - POST (primeste un CarCreateDTO, va returna un CarDTO) -> acest
-	// endpoint NU va adauga o masina la o persoana
-	@PostMapping("/add")
-	public CarDto createCar(CarCreateDto carCreateDto) {
-		Car carCreated = carService.createCar(carMapper.CarCreateDtoToCar(carCreateDto));
-		return carMapper.CarToCarDto(carCreated);
-
+	private CarMapper carMapper;
+	
+	@PostMapping
+	public CarDTO createCar(@RequestBody CarCreateDTO carCreateDTO) {
+		Car car = carService.createCar(carMapper.carCreateDTO2Car(carCreateDTO));
+		return carMapper.Car2CarDTO(car);		
 	}
 
-	// cars/{personId} - POST (primeste un CarCreateDTO, va returna un CarDTO) ->
-	// aceste endpoint VA ADAUGA o masina la o persoana
-	@PostMapping("/add/{personId}")
-	public ResponseEntity<Object> createCarWithPerson(@PathVariable Integer personId,
-			@RequestBody CarCreateDto carCreateDto) {
-		Car carCreated = carService.createCarWithPerson(personId, carMapper.CarCreateDtoToCar(carCreateDto));
-		return ResponseEntity.ok(carMapper.CarToCarDto(carCreated));
-
+	@PostMapping("/{personId}")
+	public CarDTO createCarAdd(@RequestBody CarCreateDTO carCreateDTO, @PathVariable Integer personId) {
+		Car car = carService.createCarAdd(carMapper.carCreateDTO2Car(carCreateDTO), personId);
+		return carMapper.Car2CarDTO(car);	
+	}
+	
+	@DeleteMapping("car/{carId}")
+	public void  deleteCarId(@PathVariable Integer carId) {
+		carService.deleteCarId(carId);
+	}
+	
+	@GetMapping("/{carId}")
+	public CarDTO getCatById(@PathVariable Integer carId) {
+		return carMapper.Car2CarDTO(carService.getCarById(carId));
+	
 	}
 }
