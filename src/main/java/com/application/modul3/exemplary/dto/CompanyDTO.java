@@ -2,7 +2,7 @@ package com.application.modul3.exemplary.dto;
 
 import java.time.LocalDate;
 
-public class ExemplaryDTO {
+public class CompanyDTO {
 	private Integer id;
 	private LocalDate date;
 	private String code;

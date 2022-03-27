@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.application.modul3.exemplary.dto.ExemplaryDTO;
+import com.application.modul3.exemplary.dto.CompanyDTO;
 import com.application.modul3.exemplary.mapper.ExemplaryMapper;
 
 @RestController
@@ -28,7 +28,7 @@ public class ExemplaryController {
 
 	@PostMapping("/add/{bookId}/{publisherId}")
 	public ResponseEntity<Object> createExemplary(@PathVariable Integer bookId, @PathVariable Integer publisherId,
-			@RequestBody ExemplaryDTO exemplaryDTO) {
+			@RequestBody CompanyDTO exemplaryDTO) {
 		try {
 			Exemplary createdExemplary = exemplaryService.createExemplary(bookId, publisherId,
 					exemplaryMapper.exemplaryDTO2Exemplary(exemplaryDTO));
@@ -42,7 +42,7 @@ public class ExemplaryController {
 	}
 
 	@GetMapping("/list/{bookId}")
-	public List<ExemplaryDTO> findExemplariesByBookId(@PathVariable Integer bookId) {
+	public List<CompanyDTO> findExemplariesByBookId(@PathVariable Integer bookId) {
 		return exemplaryMapper.exemplaryList2ExemplaryDTOList(exemplaryService.findExemplariesByBookId(bookId));
 	}
 

@@ -16,7 +16,7 @@ import com.application.modul3.appointment.dto.AppointmentDTO;
 import com.application.modul3.appointment.dto.AppointmentInfoDTO;
 import com.application.modul3.appointment.mapper.AppointmentMapper;
 import com.application.modul3.exemplary.Exemplary;
-import com.application.modul3.exemplary.dto.ExemplaryDTO;
+import com.application.modul3.exemplary.dto.CompanyDTO;
 import com.application.modul3.exemplary.mapper.ExemplaryMapper;
 
 @RestController
@@ -30,7 +30,7 @@ public class AppointmentController {
 	private ExemplaryMapper exemplaryMapper;
 
 	@GetMapping("/find/{startDate}/{endDate}/{bookId}")
-	public List<ExemplaryDTO> findFreeExemplaries(@PathVariable String startDate, @PathVariable String endDate,
+	public List<CompanyDTO> findFreeExemplaries(@PathVariable String startDate, @PathVariable String endDate,
 
 			@PathVariable Integer bookId) {
 		List<Exemplary> freeExemplaries = appointmentService.findFreeExemplaries(LocalDate.parse(startDate),
@@ -45,7 +45,7 @@ public class AppointmentController {
 	}
 
 	@PostMapping("/find")//////////NOT WORKING
-	public List<ExemplaryDTO> getExemplariesForPeriod(@RequestBody AppointmentInfoDTO appointmentInfoDTO) {
+	public List<CompanyDTO> getExemplariesForPeriod(@RequestBody AppointmentInfoDTO appointmentInfoDTO) {
 		List<Exemplary> exemplaries = appointmentService.getExemplariesForPeriod(appointmentInfoDTO.getDateFrom(),
 				appointmentInfoDTO.getDateUntil(), appointmentInfoDTO.getBookId());
 		return exemplaryMapper.exemplaryList2ExemplaryDTOList(exemplaries);

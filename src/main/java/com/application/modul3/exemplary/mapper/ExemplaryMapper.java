@@ -6,12 +6,12 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import com.application.modul3.exemplary.Exemplary;
-import com.application.modul3.exemplary.dto.ExemplaryDTO;
+import com.application.modul3.exemplary.dto.CompanyDTO;
 
 @Component
 public class ExemplaryMapper {
-	public ExemplaryDTO exemplary2ExemplaryDTO(Exemplary exemplary) {
-		ExemplaryDTO exemplaryDTO = new ExemplaryDTO();
+	public CompanyDTO exemplary2ExemplaryDTO(Exemplary exemplary) {
+		CompanyDTO exemplaryDTO = new CompanyDTO();
 		exemplaryDTO.setId(exemplary.getId());
 		exemplaryDTO.setDate(exemplary.getDate());
 		exemplaryDTO.setCode(exemplary.getCode());
@@ -19,11 +19,11 @@ public class ExemplaryMapper {
 		return exemplaryDTO;
 	}
 
-	public List<ExemplaryDTO> exemplaryList2ExemplaryDTOList(List<Exemplary> exemplaryList) {
+	public List<CompanyDTO> exemplaryList2ExemplaryDTOList(List<Exemplary> exemplaryList) {
 		return exemplaryList.stream().map(exemplary -> exemplary2ExemplaryDTO(exemplary)).collect(Collectors.toList());
 	}
 
-	public Exemplary exemplaryDTO2Exemplary(ExemplaryDTO exemplaryDTO) {
+	public Exemplary exemplaryDTO2Exemplary(CompanyDTO exemplaryDTO) {
 		Exemplary exemplary = new Exemplary();
 		exemplary.setId(exemplaryDTO.getId());
 		exemplary.setDate(exemplaryDTO.getDate());
