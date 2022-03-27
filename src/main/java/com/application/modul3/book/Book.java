@@ -110,4 +110,13 @@ public class Book {
 	public void setAuthors(Set<Author> authors) {
 		this.authors = authors;
 	}
+	
+	// obtin id autorilor de la o carte
+		public Set<Integer> getAuthorsIDS() {
+			Set<Integer> set = new HashSet<>();
+			for (Author author : authors) {
+				set.add(author.getId());
+			}
+			return set;
+		}
 }
